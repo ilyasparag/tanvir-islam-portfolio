@@ -54,7 +54,18 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
               <h3 className="text-xl leading-snug font-semibold tracking-tight text-bone">
                 {p.title}
               </h3>
-              <p className="text-sm leading-relaxed text-bone-2">{p.summary}</p>
+
+              {/* Hook, then description. They are grouped on a tighter gap than
+                  the card's own, and the hook takes tan rather than bone, so it
+                  reads as its own line and not as the first clause of the
+                  summary. Tan because a headline is information — lime stays
+                  reserved for things you can act on. */}
+              <div className="flex flex-col gap-2">
+                <p className="text-[13.5px] leading-snug font-medium text-tan">
+                  {p.headline}
+                </p>
+                <p className="text-sm leading-relaxed text-bone-2">{p.summary}</p>
+              </div>
 
               <ul className="flex flex-wrap gap-1.5">
                 {p.stack.map((s) => (

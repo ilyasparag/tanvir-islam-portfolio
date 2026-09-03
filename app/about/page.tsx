@@ -4,9 +4,15 @@ import Scramble from "@/components/motion/Scramble";
 import Container from "@/components/ui/Container";
 import { profile, education, interests, languages, experience } from "@/content/site";
 
+// Its own description — this page and the homepage previously shared one
+// string, so they were indistinguishable in search results and link previews.
 export const metadata: Metadata = {
   title: "About",
-  description: profile.intro,
+  description: profile.aboutMeta,
+  openGraph: {
+    title: `About — ${profile.name}`,
+    description: profile.aboutMeta,
+  },
 };
 
 export default function About() {
@@ -23,24 +29,22 @@ export default function About() {
         </Reveal>
 
         <div className="mt-14 grid gap-14 md:grid-cols-[1.6fr_1fr]">
+          {/* Prose was hardcoded here; it lives in content/site.ts now, like
+              every other fact on the site. First paragraph keeps the larger
+              size it always had. */}
           <Reveal className="flex flex-col gap-5">
-            <p className="max-w-[60ch] text-lg leading-relaxed text-bone">{profile.intro}</p>
-            <p className="max-w-[60ch] leading-relaxed text-bone-2">
-              My internship put that in a production setting, inside a bank, where an
-              unmaintained record stops being a theoretical problem. You cannot patch,
-              back up or plan capacity for a database nobody remembers exists.
-            </p>
-            <p className="max-w-[60ch] leading-relaxed text-bone-2">
-              At the same time my thesis pulled me into applied machine learning —
-              extracting acoustic features from voice recordings to detect laryngeal
-              disease. The two look unrelated. They are not: both are questions about
-              what a representation keeps and what it quietly throws away.
-            </p>
-            <p className="max-w-[60ch] leading-relaxed text-bone-2">
-              I am most interested in where machine learning genuinely extends database
-              work — anomaly detection, capacity forecasting, query behaviour — rather
-              than where it is simply fashionable to bolt on.
-            </p>
+            {profile.about.map((para, i) => (
+              <p
+                key={para.slice(0, 40)}
+                className={
+                  i === 0
+                    ? "max-w-[60ch] text-lg leading-relaxed text-bone"
+                    : "max-w-[60ch] leading-relaxed text-bone-2"
+                }
+              >
+                {para}
+              </p>
+            ))}
             <p className="mt-2 max-w-[60ch] font-mono text-sm leading-relaxed text-tan">
               {profile.seeking}
             </p>
