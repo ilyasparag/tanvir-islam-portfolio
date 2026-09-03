@@ -1,3 +1,6 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { profile } from "@/content/site";
 import Reveal from "@/components/motion/Reveal";
 import Button from "@/components/ui/Button";
@@ -11,24 +14,51 @@ const CHANNELS = [
   { label: "linkedin", value: "/in/tanvir-islam", href: profile.links.linkedin },
 ];
 
+/**
+ * The footer is in the root layout, so every page ends on it.
+ *
+ * About is the exception. It ran the full closing section — same heading, same
+ * paragraph, same call to action as the homepage — which made the page end on
+ * the site's ending rather than its own. There it gets a one-line sign-off
+ * instead. The channel list stays on both: it is the only place GitHub and
+ * LinkedIn appear anywhere on the site, and About is a page recruiters land on
+ * directly.
+ */
 export default function SiteFooter() {
+  const compact = usePathname() === "/about";
+
   return (
     <footer id="contact" className="pt-20 pb-10 sm:pt-28">
       <Container>
-        {/* same marker and same decode as every other section — this one was
-            the odd one out, static and differently labelled */}
-        <SectionHead
-          index="04"
-          label="Contact"
-          title="Let's build something together"
-          subtitle={`${profile.seeking} If that sounds like a fit, or you just want to talk about databases, my inbox is open.`}
-        />
+        {compact ? (
+          <Reveal className="flex flex-wrap items-baseline gap-x-3 gap-y-2 border-t border-glass-line pt-8">
+            <p className="font-mono text-[13px] text-bone-2">{profile.signoff}</p>
+            <a
+              href={`mailto:${profile.email}`}
+              data-cursor-label="Email"
+              className="font-mono text-[13px] text-lime underline-offset-4 transition-colors hover:underline"
+            >
+              {profile.email}
+            </a>
+          </Reveal>
+        ) : (
+          <>
+            {/* same marker and same decode as every other section — this one was
+                the odd one out, static and differently labelled */}
+            <SectionHead
+              index="04"
+              label="Contact"
+              title="Let's build something together"
+              subtitle={`${profile.seeking} If that sounds like a fit, or you just want to talk about databases, my inbox is open.`}
+            />
 
-        <Reveal>
-          <Button href={`mailto:${profile.email}`}>{profile.email}</Button>
-        </Reveal>
+            <Reveal>
+              <Button href={`mailto:${profile.email}`}>{profile.email}</Button>
+            </Reveal>
+          </>
+        )}
 
-        <Reveal delay={0.08} className="mt-16">
+        <Reveal delay={0.08} className={compact ? "mt-10" : "mt-16"}>
           <dl className="grid gap-px overflow-hidden rounded-2xl border border-glass-line bg-glass-line sm:grid-cols-2 lg:grid-cols-4">
             {CHANNELS.map((c) => (
               <div key={c.label} className="bg-void/60 p-5 backdrop-blur-xl">

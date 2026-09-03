@@ -26,6 +26,9 @@ export type Project = {
   period: string;
   /** Short enough to sit in a table cell. */
   stack: string[];
+  /** The hook, 6–10 words. Sits above the summary on a card and has to earn
+   *  the read — it is not a shorter summary, it is the reason to care. */
+  headline: string;
   /** One line, used on cards and in the catalogue. */
   summary: string;
   /** Detail page prose. */
@@ -47,10 +50,36 @@ export const profile = {
   // Fresher voice: curious and specific, not a specialist's claim to authority.
   positioning:
     "I build things with databases, then take them apart to find out why they broke.",
+  // The hero paragraph. Same rewrite as `about[0]`, minus the "I'm Tanvir —"
+  // opener: on the homepage it sits directly under the name set at 6.6rem, so
+  // introducing himself again there would read as a stutter.
   intro:
-    "Fresh CSE graduate from AIUB, currently interning as a database administrator at UCBL. Most of what I know came from coursework and from building things until they broke. I picked the Information Systems track because the part that held my attention was always underneath the application — how data is modelled, and how a schema either absorbs change or fights it.",
+    "A CSE graduate from AIUB, currently doing my internship as a Database Administrator at UCBL. I picked Information Systems as my track because I was always more curious about what's happening underneath an app than the app itself: how the data is structured, and how well a schema holds up once real use starts pulling at it.",
+  /**
+   * About-page prose, in the client's own words.
+   *
+   * The previous draft was flagged in review as reading AI-written — not for
+   * any single sentence but for the pattern: setup-and-reversal constructions
+   * ("The two look unrelated. They are not:"), every paragraph landing on a
+   * tidy abstraction, and no first-person slips anywhere. This copy is the
+   * client's supplied rewrite. Keep the plainer register and the contractions
+   * if you edit it; do not polish the friction back out.
+   */
+  about: [
+    "I'm Tanvir — a CSE graduate from AIUB, currently doing my internship as a Database Administrator at UCBL. I picked Information Systems as my track because I was always more curious about what's happening underneath an app than the app itself: how the data is structured, and how well a schema holds up once real use starts pulling at it.",
+    "Interning inside a bank made that concrete fast. In a production, regulated environment, a database nobody documented isn't just messy — you can't patch it, back it up, or plan capacity for it, because as far as anyone can tell, it doesn't exist.",
+    "My final-year thesis pulled me somewhere different: using machine learning to pick up early signs of laryngeal disease from voice recordings. It doesn't look related to database work, but it's asking the same underlying question — what does a representation of something actually capture, and what does it leave out?",
+    "Right now I'm most interested in where machine learning can genuinely support database work — anomaly detection, capacity forecasting, query behaviour — rather than places it's just fashionable to bolt on.",
+  ],
+  // Home and About shared one description word for word, so both pages looked
+  // identical in search results and link previews. This one is About's alone.
+  aboutMeta:
+    "CSE graduate from AIUB and database administration intern at UCBL — how I got here, what I studied, and the work I am looking for next.",
   seeking:
     "Looking for my first full-time role in database administration, data, or IT operations.",
+  // Short close for pages that should not repeat the full homepage contact
+  // block. About ends on this instead of a second copy of the site's ending.
+  signoff: "Open to full-time DBA, data and IT operations roles.",
   location: "Dhaka, Bangladesh",
   email: "islamtanvir1811@gmail.com",
   phone: "+88 01740-640605",
@@ -72,6 +101,7 @@ export const projects: Project[] = [
     year: 2026,
     period: "2026 — in progress",
     stack: ["FastAPI", "PostgreSQL", "React"],
+    headline: "Turning a spreadsheet nobody fully trusted into a system of record.",
     summary:
       "An internal service that catalogues a bank's database estate, replacing a manual tracking process.",
     body: [
@@ -98,6 +128,7 @@ export const projects: Project[] = [
     year: 2026,
     period: "2025–2026",
     stack: ["Python", "MFCC · Jitter · Shimmer · HNR", "CNN-LSTM"],
+    headline: "Teaching a model to listen for what a clinician listens for.",
     summary:
       "Undergraduate thesis: acoustic features of the voice as an early signal for laryngeal pathology.",
     body: [
@@ -123,6 +154,7 @@ export const projects: Project[] = [
     year: 2025,
     period: "2025",
     stack: ["IEEE format", "Qualitative analysis"],
+    headline: "Adopting Agile is easy. Staying Agile six months later is the actual problem.",
     summary:
       "Co-authored paper on why Agile adoption in the Bangladeshi software industry stalls after the methodology is chosen.",
     body: [
@@ -142,6 +174,7 @@ export const projects: Project[] = [
     year: 2025,
     period: "2025",
     stack: ["PHP", "MySQL", "HTML", "CSS"],
+    headline: "One schema behind registration, scheduling and billing — built in that order for a reason.",
     summary:
       "Full-stack hospital system: registration, scheduling and billing over a normalised relational schema.",
     body: [
@@ -166,6 +199,7 @@ export const projects: Project[] = [
     year: 2025,
     period: "2025",
     stack: ["Python", "Web scraping", "Linear regression"],
+    headline: "The model believed the ratings more than they deserved — until the cleanup said otherwise.",
     summary:
       "A small end-to-end data project: scrape, clean, model, and find out the obvious answer is wrong.",
     body: [
@@ -181,7 +215,11 @@ export const education = [
     qualification: "BSc in Computer Science & Engineering",
     detail: "Information Systems concentration",
     institution: "American International University-Bangladesh (AIUB)",
-    period: "2022 – 2026 (expected)",
+    // "(expected)" dropped at the client's request — the coursework is done.
+    // The reviewed alternative was "2022 – 2026 · Coursework complete", but the
+    // Journey rail on the homepage is a fixed 150px column and that string
+    // wraps to two lines in it. The plain range needs no layout concession.
+    period: "2022 – 2026",
   },
   {
     qualification: "Higher Secondary Certificate",
