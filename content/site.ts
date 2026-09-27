@@ -41,6 +41,8 @@ export type Project = {
   /** Rendered as a disclosure note on the detail page. */
   restricted?: string;
   status?: string;
+  /** Only set when the repo actually has something in it to read. */
+  repoUrl?: string;
 };
 
 export const profile = {
@@ -193,20 +195,21 @@ export const projects: Project[] = [
     slug: "anime-ratings-analysis",
     badge: "University project",
     learned:
-      "Most of the work is deciding what a row means before any model sees it. The regression itself took an afternoon; the cleaning took a week.",
+      "The model came back with a negative R² — worse than just predicting the average rating for every title. That was the honest finding: rank and release year barely explain how an anime actually gets rated, and no amount of retuning the regression was going to fix a feature set that was missing the point.",
     title: "Anime Ratings Predictive Analysis",
     kind: "data",
-    year: 2025,
-    period: "2025",
-    stack: ["Python", "Web scraping", "Linear regression"],
-    headline: "The model believed the ratings more than they deserved — until the cleanup said otherwise.",
+    year: 2026,
+    period: "2025–2026",
+    stack: ["R", "rvest", "Linear regression"],
+    headline: "The model believed the ratings more than they deserved — until the numbers said otherwise.",
     summary:
-      "A small end-to-end data project: scrape, clean, model, and find out the obvious answer is wrong.",
+      "Group project for AIUB's Data Science course: scrape MyAnimeList, model rating from rank and year, and find out the obvious predictors barely explain anything.",
     body: [
-      "A deliberately small project run end to end: scrape the top titles from MyAnimeList, clean what comes back, and model the relationship between popularity, release year and user rating with linear regression.",
-      "The value was in the pipeline rather than the finding. Scraped data arrives inconsistent, and most of the work is deciding what a row means before any model sees it — which is the same problem, at a smaller scale, as deciding what a catalogue record means.",
+      "A four-person group project for AIUB's Introduction to Data Science course: scrape the top 50 titles from MyAnimeList's \"Top Anime by Popularity\" page with R and the rvest library, clean what comes back, and test whether an anime's popularity rank and release year predict its user rating.",
+      "Rank, year and a derived age-in-years feature went into a linear regression trained on 70% of the data and tested on the rest. The result was a negative R² on the held-out set — the model did worse than simply guessing the average rating every time. Popularity and recency turned out to explain almost nothing about how an anime is actually rated.",
     ],
-    status: "Independent project",
+    status: "Group coursework, submitted January 2026",
+    repoUrl: "https://github.com/islamtanvir42/Web-scraping-",
   },
 ];
 

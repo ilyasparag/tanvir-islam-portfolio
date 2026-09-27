@@ -122,6 +122,22 @@ export default async function ProjectPage({
                 <p className="font-mono text-sm text-bone-2">{project.status}</p>
               </div>
             )}
+
+            {project.repoUrl && (
+              <div>
+                <p className="eyebrow mb-2">Source</p>
+                <a
+                  href={project.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor-label="Open repo"
+                  className="inline-flex items-center gap-2 font-mono text-sm text-lime underline-offset-4 transition-colors hover:underline"
+                >
+                  View on GitHub
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            )}
           </Reveal>
         </div>
 
