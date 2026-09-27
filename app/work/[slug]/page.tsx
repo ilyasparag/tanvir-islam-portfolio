@@ -141,6 +141,17 @@ export default async function ProjectPage({
           </Reveal>
         </div>
 
+        {project.code && (
+          <Reveal className="mt-14">
+            <p className="eyebrow mb-4">{project.code.language} script</p>
+            <div className="glass max-h-[520px] overflow-auto rounded-2xl border border-glass-line p-5">
+              <pre className="font-mono text-[12px] leading-relaxed text-bone-2">
+                <code>{project.code.source}</code>
+              </pre>
+            </div>
+          </Reveal>
+        )}
+
         <Reveal className="mt-20 border-t border-glass-line pt-8">
           <p className="eyebrow mb-3">Next project</p>
           <Link
