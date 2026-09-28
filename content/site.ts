@@ -47,6 +47,8 @@ export type Project = {
   code?: { language: string; source: string };
   /** Downloadable source files served from /public, e.g. the report or raw script. */
   files?: { label: string; href: string }[];
+  /** Screenshots of a sanitized demo build — never the real restricted tool. */
+  screenshots?: { src: string; alt: string }[];
 };
 
 export const profile = {
@@ -121,8 +123,22 @@ export const projects: Project[] = [
       "Built the React interface used to review and correct records",
     ],
     restricted:
-      "This work sits inside a regulated bank. The description here is deliberately limited to capability and stack — no database versions, host names, instance counts, or topology. Screenshots and figures are omitted for the same reason.",
+      "This work sits inside a regulated bank. The description here is deliberately limited to capability and stack — no database versions, host names, instance counts, or topology, and the real tool is not shown. The screenshots below are from a separate demo I built on my own time, with entirely fictional servers and data, just to show what the interface looks like.",
     status: "In progress",
+    screenshots: [
+      {
+        src: "/projects/database-inventory-service/landing.png",
+        alt: "Sign-in screen for the demo build of the database inventory tool",
+      },
+      {
+        src: "/projects/database-inventory-service/dashboard.png",
+        alt: "Demo dashboard showing five sample databases by platform, OS family and RAM usage, with expiry alerts — all fictional sample data",
+      },
+      {
+        src: "/projects/database-inventory-service/database-detail.png",
+        alt: "Demo detail page for a single sample database, showing metadata, lifecycle dates, resource usage and version history — all fictional sample data",
+      },
+    ],
   },
   {
     slug: "voice-signal-throat-cancer",

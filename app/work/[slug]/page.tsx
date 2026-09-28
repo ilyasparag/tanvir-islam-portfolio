@@ -162,6 +162,23 @@ export default async function ProjectPage({
           </Reveal>
         </div>
 
+        {project.screenshots && project.screenshots.length > 0 && (
+          <Reveal className="mt-14">
+            <p className="eyebrow mb-4">Demo build</p>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {project.screenshots.map((s) => (
+                <div
+                  key={s.src}
+                  className="glass overflow-hidden rounded-2xl border border-glass-line"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={s.src} alt={s.alt} className="block w-full" />
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        )}
+
         {project.code && (
           <Reveal className="mt-14">
             <p className="eyebrow mb-4">{project.code.language} script</p>
