@@ -45,6 +45,8 @@ export type Project = {
   repoUrl?: string;
   /** The actual script behind the project, shown verbatim on the detail page. */
   code?: { language: string; source: string };
+  /** Downloadable source files served from /public, e.g. the report or raw script. */
+  files?: { label: string; href: string }[];
 };
 
 export const profile = {
@@ -212,6 +214,10 @@ export const projects: Project[] = [
     ],
     status: "Group coursework, submitted January 2026",
     repoUrl: "https://github.com/islamtanvir42/Web-scraping-",
+    files: [
+      { label: "Report (PDF)", href: "/projects/anime-ratings-analysis/anime-ratings-report.pdf" },
+      { label: "R script", href: "/projects/anime-ratings-analysis/anime_rating_analysis.R" },
+    ],
     code: {
       language: "R",
       source: `# ============================================================

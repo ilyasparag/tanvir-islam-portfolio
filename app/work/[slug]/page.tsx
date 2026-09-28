@@ -138,6 +138,27 @@ export default async function ProjectPage({
                 </a>
               </div>
             )}
+
+            {project.files && project.files.length > 0 && (
+              <div>
+                <p className="eyebrow mb-2">Files</p>
+                <ul className="flex flex-col gap-2">
+                  {project.files.map((f) => (
+                    <li key={f.href}>
+                      <a
+                        href={f.href}
+                        download
+                        data-cursor-label="Download"
+                        className="inline-flex items-center gap-2 font-mono text-sm text-lime underline-offset-4 transition-colors hover:underline"
+                      >
+                        {f.label}
+                        <span aria-hidden="true">↓</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </Reveal>
         </div>
 
